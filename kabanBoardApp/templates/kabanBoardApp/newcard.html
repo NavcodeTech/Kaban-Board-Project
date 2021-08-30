@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Kaban-Board App</title>
+    <style>
+    {% load static %}
+        body{
+        font-family: 'Lato', sans-serif;
+        background-image:url({% static 'kabanBoardApp/Backkb.png' %});
+        background-repeat:no-repeat;
+        background-size:100% 100%;
+        background-attachment:fixed;
+        }
+        #logo{
+        width:100%;
+        display: inline-block;
+        margin-top: 0px;
+        }
+
+#logo a{
+        float:right;
+        margin-top:10px;
+        }
+        .user_card {
+	justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			width: 750px;
+			margin-top: auto;
+			margin-bottom: auto;
+			background: #74cfbf;
+			position: relative;
+			display: flex;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+
+		}
+
+		.form_container {
+			margin-top: 20px;
+		}
+
+		#form-title{
+			color: #fff;
+		}
+		#newcard{
+		float:right;
+		margin-top:10px;
+		padding-right:100px;
+		}
+
+    </style>
+</head>
+<body>
+{% load static %}
+<div class ="containerfull">
+<div class="container-fluid" id="logo">
+    <img src="{% static 'kabanBoardApp/Logo3kb.png' %}">
+    <form class="d-flex" id="home" action="{% url 'home' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-success" value="home" type="submit">Go to home</button>
+      </form>
+</div>
+     <div class="container mt-3" id="message">
+    {% if messages%}
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+    {% endif %}
+</div>
+    <form method="post" action="{% url 'newcard' %} " method="post">
+        {% csrf_token %}
+    <div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center form_container">
+        <table>
+        <tr>
+         <td>
+             <label for="cardno">Card No.:</label>
+         </td>
+         <td>
+             <input type="integer" id="cardno" name="cardno"  Placeholder="card No." required>
+         </td>
+        </tr>
+         <tr>
+         <td>
+              <label for="taskn">Task name:</label>
+         </td>
+         <td>
+              <input type="text" id="taskn" name="taskn" placeholder="Task name" required>
+         </td>
+
+        </tr>
+        <tr>
+           <td>
+                <label for="taskid">Task Id :</label>
+          </td>
+             <td>
+                <input type="text" id="taskid" name="taskid" placeholder="Task Id" required>
+             </td>
+        </tr>
+        <tr>
+           <td>
+                <label for="department">Department:</label>
+          </td>
+             <td>
+                <input type="text" id="department" name="department" placeholder="Department" required>
+             </td>
+            <td></td>
+             <td>
+                <label for="team">Team name:</label>
+          </td>
+             <td>
+                <input type="text" id="team" name="team" placeholder="Team Name" required>
+             </td>
+        </tr>
+         <tr>
+             <td>
+                 <label for="expecttime">Expected time:</label></br>
+             </td>
+             <td>
+                 <input type="text" id="expecttime" name="expecttime"  required></input>
+             </td>
+             <td></td>
+              <td>
+                 <label for="addinfo">Additional Info:</label></br>
+             </td>
+         </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                 <textarea id="addinfo" name="addinfo" rows="5" cols="18" required></textarea>
+             </td>
+            </tr>
+            <tr>
+                <td><label for="duedate">Due date:</label></br> </td>
+                <td><input type="date" id="duedate" name="duedate" required></td>
+                <td>
+                    <input type="submit" value="submit" name="data" class="btn btn-primary">
+                </td>
+            </tr>
+        </table>
+			</div>
+            </div>
+	</div>
+</div>
+    </form>
+</div>
+</body>

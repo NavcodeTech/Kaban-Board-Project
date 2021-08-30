@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <title>Kaban-Board App</title>
+    <style>
+    {% load static %}
+        body{
+        font-family: 'Lato', sans-serif;
+        background-image:url({% static 'kabanBoardApp/Backkb.png' %});
+        background-repeat:no-repeat;
+        background-size:100% 100%;
+        background-attachment:fixed;
+        }
+        #logo{
+        width:100%;
+        display: inline-block;
+        margin-top: 0px;
+        }
+
+#logo a{
+        float:right;
+        margin-top:20px;
+        }
+        #logo button{
+        width:300px;
+        height:50px;
+        margin-top:30px;
+        }
+#listtd{
+            justify-content: center;
+			flex-direction: column;
+			padding: 50px;
+			width: 30%;
+			float:left;
+			margin-bottom:auto;
+			margin-left: 30px;
+			background: #74cfbf;
+		    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+			padding-right:50px;
+			}
+			#listp{
+			justify-content: center;
+			flex-direction: column;
+			padding: 40px;
+			width: 30%;
+			margin-top:auto;
+			margin-bottom:30px;
+			margin-left:40px;
+			margin:0 ,auto;
+			float:left;
+			background: #74cfbf;
+		    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+			}
+			#listd{
+			justify-content: center;
+			flex-direction: column;
+			padding: 40px;
+			width: 30%;
+			float:right;
+			background: #74cfbf;
+			margin-right:30px;
+			margin-top:auto;
+			margin-bottom:auto;
+
+		    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+			}
+			.cards{
+            justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			width: 200px;
+			height:200px;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			background: #74cfbf;
+			position: relative;
+			display: flex;
+		    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+			}
+			.cards:hover .transfer {
+			display:block;
+			}
+			.cards .transfer{
+			display:none;
+			}
+			#newcard{
+		float:right;
+		margin-top:10px;
+		padding-right:100px;
+		}
+		 #greetings{
+         width:100%;
+         display: inline-block;
+         }
+		       .greetings h2 {
+   margin: 30px;
+   background-color: #44BBC1;
+   border: 1px solid black;
+   opacity: 0.8;
+   width :30%;
+   padding-left:100px;
+   border-radius:10px;
+}
+
+
+
+
+    </style>
+    {% load static %}
+    <script src="{% static 'kabanBoardApp/Sortable.min.js' %}"></script>
+    <script src="{% static 'kabanBoardApp/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'kabanBoardApp/jquery-ui.js' %}"></script>
+
+</head>
+<body>
+{% load static %}
+<div class ="containerfull">
+<div class="container-fluid" id="logo">
+    <img src="{% static 'kabanBoardApp/Logo3kb.png' %}">
+     <a href="/logout"><img src="{% static 'kabanBoardApp/logoutb.png' %}"></a>
+    <form class="d-flex" id="newcard" action="{% url 'newcard' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-success" value="new" type="submit">New Card</button>
+      </form>
+
+    </div>
+    <div class="greetings" id="greetings">
+    {% csrf_token %}
+    <h2> Welcome, {{user.username}} </h2>
+</div>
+
+
+    <div id="listtd"  class="container">
+        <table id="tabletd" class="table" border="1">
+              <h2> To do list</h2>
+
+                    {% if cards %}
+                    {% for card in cards %}
+        <tr id="tr"><td><div class="cards"  id="cardstd">
+                           Card No.  : {{ card.cardno }}
+                           Task Id   : {{ card.taskid }}
+                           Task Name : {{ card.taskname }}
+
+
+            <div class="transfer">
+                <form action="{% url 'home' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ card.cardno }}" name="cardno">
+                    <input type="hidden" value="{{ card.taskid }}" name="taskid">
+                    <input type="hidden" value="{{ card.taskname }}" name="taskname">
+                <button type="submit" name="progress" class="btn btn-primary">Move to Progress</button>
+                </form>
+            </div>
+        </div>
+        </td>
+            <td><input type="button" value="move up" class="move up" /></td>
+        <td><input type="button" value="move down" class="move down" /></td>
+
+                    {% endfor %}
+        </tr>
+        </table>
+                    {% endif %}
+
+			</div>
+
+
+        <div id="listp" class="container" >
+            <table id="tablep" class="table" border="1">
+                <h2> Progress</h2>
+            {% if progress %}
+                    {% for card in progress %}
+        <tr><td><div class="cards" id="cardsp">
+                        Card No.  : {{ card.cardno }}
+                        Task Id   : {{ card.taskid }}
+                        Task Name : {{ card.taskname }}
+            <div class="transfer">
+                <form action="{% url 'home' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ card.cardno }}" name="cardno">
+                    <input type="hidden" value="{{ card.taskid }}" name="taskid">
+                    <input type="hidden" value="{{ card.taskname }}" name="taskname">
+                    <button type="submit" name="complete" class="btn btn-primary">Move to Complete</button>
+                </form>
+            </div>
+        </div>
+        </td>
+            <td><input type="button" value="move up" class="move up" /></td>
+        <td><input type="button" value="move down" class="move down" /></td>
+                    {% endfor %}
+        </tr>
+            </table>
+                    {% endif %}
+			</div>
+    <div id="listd" class="container">
+        <table id="tabled" class="table" border="1">
+         <tr>    <h2> Completed</h2></tr>
+            {% if complete %}
+                    {% for card in complete %}
+        <tr><td><div class="cards" id="cardsd">
+                        Card No.  : {{ card.cardno }}
+                        Task Id   : {{ card.taskid }}
+                        Task Name : {{ card.taskname }}
+            <div class="transfer">
+                <form action="{% url 'home' %}" method="post">
+            {% csrf_token %}
+                    <input type="hidden" value="{{ card.cardno }}" name="cardno">
+                    <input type="hidden" value="{{ card.taskid }}" name="taskid">
+                    <input type="hidden" value="{{ card.taskname }}" name="taskname">
+                    <button type="submit" name="delete" class="btn btn-primary">Delete Task</button>
+                </form>
+            </div>
+        </div>
+        </td>
+            <td><input type="button" value="move up" class="move up" /></td>
+        <td><input type="button" value="move down" class="move down" /></td>
+                    {% endfor %}
+        </tr>
+        </table>
+                    {% endif %}
+			</div>
+</div>
+<script>
+  $('#tabletd input.move').click(function() {
+    var row = $(this).closest('tr');
+    if ($(this).hasClass('up'))
+        row.prev().before(row);
+    else
+        row.next().after(row);
+});
+$('#tablep input.move').click(function() {
+    var row = $(this).closest('tr');
+    if ($(this).hasClass('up'))
+        row.prev().before(row);
+    else
+        row.next().after(row);
+});
+$('#tabled input.move').click(function() {
+    var row = $(this).closest('tr');
+    if ($(this).hasClass('up'))
+        row.prev().before(row);
+    else
+        row.next().after(row);
+});
+    </script>
+</body>
